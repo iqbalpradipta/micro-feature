@@ -13,3 +13,12 @@ export const createPaslonSchema = Joi.object({
     visiMisi: Joi.string().required(),
     img: Joi.string().allow(null),
 })
+
+export const createPartaiSchema = Joi.object({
+    name: Joi.string().max(50).required(),
+    ketum: Joi.number().required(),
+    visiMisi: Joi.string().required(),
+    alamat: Joi.string().required(),
+    img: Joi.string().allow(null),
+})
+

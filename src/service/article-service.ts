@@ -7,14 +7,32 @@ export default new (class articleService {
 
   async get(): Promise<object | string> {
     try {
-      const Article = await this.ArticleRepository.createQueryBuilder("article").getMany();
+      const GetArticle = await this.ArticleRepository.createQueryBuilder("article").getMany();
 
       return {
         messages: "Success get data",
-        data: Article,
+        data: GetArticle,
       };
     } catch (error) {
       throw error;
+    }
+  }
+
+  async getId(id: any): Promise<object> {
+    try {
+      const ArticleGetById = await this.ArticleRepository
+            .createQueryBuilder()
+            .select("article")
+            .from(Article, "article")
+            .where(`article.id = :id`, id)
+            .getOne()
+
+      return {
+        messages: "success get data by Id",
+        data: ArticleGetById,
+      }
+    } catch (error) {
+      
     }
   }
 
