@@ -49,12 +49,12 @@ export default new (class ArticleController {
       const { error, value } = createArticleSchema.validate(data);
       if (error) return res.status(400).json(error.details[0].message);
 
-      // cloudinary.upload()
-      // const cloudinaryRes = await cloudinary.destination(value.img)
+      cloudinary.upload()
+      const cloudinaryRes = await cloudinary.destination(value.img)
 
-      // value.img = cloudinaryRes
+      value.img = cloudinaryRes.secure_url
 
-      const response = await articleService.create(data);
+      const response = await articleService.create(value);
 
       return res.status(200).json(response);
     } catch (error) {

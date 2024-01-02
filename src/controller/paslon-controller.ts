@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import paslonService from "../service/paslon-service";
 import { createPaslonSchema } from "../utils/validator/validator";
+import cloudinary from "../libs/cloudinary";
 
 export default new (class PaslonController {
   async insert(req: Request, res: Response) {
@@ -10,10 +11,14 @@ export default new (class PaslonController {
         nomorUrut: req.body.nomorUrut,
         visiMisi: req.body.visiMisi,
         img: res.locals.filename,
+        koalisi: req.body.koalisi
       };
 
       const { error, value } = createPaslonSchema.validate(data);
       if (error) return res.status(400).json(error.details[0].message);
+      cloudinary.upload()
+      const cloudinaryRes = await cloudinary.destination(value.img)
+      value.img = cloudinaryRes.secure_url
 
       const response = await paslonService.create(value);
 
@@ -26,6 +31,7 @@ export default new (class PaslonController {
 
   async find(req: Request, res: Response) {
     try {
+      
       const response = await paslonService.get();
 
       return res.status(200).json(response);

@@ -16,4 +16,7 @@ export class Paslon {
   
   @Column()
   img: string;
+
+  @Column({ nullable: true })
+  koalisi: string;
 }

@@ -39,14 +39,14 @@ export default new class PaslonService {
                 .select("paslon")
                 .from(Paslon, "paslon")
                 .where(`paslon.id = :id`, id)
-                .getOne()
+                .getOneOrFail()
     
           return {
             messages: "success get data by Id",
             data: PaslonGetById,
           }
         } catch (error) {
-          
+          throw error
         }
       }
 }

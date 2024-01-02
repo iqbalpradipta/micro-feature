@@ -11,8 +11,8 @@ export default new class CloudinaryConfig {
 
   async destination(image: string) : Promise<any> {
     try {
-      return await cloudinary.uploader.upload(`./src/uploads/${image}`, (cb) => {
-        console.log(cb)
+      return await cloudinary.uploader.upload(`./src/uploads/${image}`, {
+        folder: "photo"
       })
     } catch (error) {
       throw error

@@ -25,14 +25,14 @@ export default new (class articleService {
             .select("article")
             .from(Article, "article")
             .where(`article.id = :id`, id)
-            .getOne()
+            .getOneOrFail()
 
       return {
         messages: "success get data by Id",
         data: ArticleGetById,
       }
     } catch (error) {
-      
+      throw error
     }
   }
 
