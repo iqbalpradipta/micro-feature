@@ -42,7 +42,7 @@ export default new class AuthService {
 
             return {
                 messages: 'login success',
-                token: `Bearer ${token}`
+                token,
             }
         } catch (error) {
             throw error

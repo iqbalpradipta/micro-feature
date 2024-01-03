@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Voting } from "./voting";
 
 @Entity({ name: "users" })
 export class Users {
@@ -19,4 +20,12 @@ export class Users {
 
   @Column()
   password: string;
+
+  @Column({ nullable: true })
+  voted: boolean;
+
+  @OneToMany(() => Voting, (voting) => voting.users, {
+    onDelete: "CASCADE"
+  })
+  voting: Voting[]
 }

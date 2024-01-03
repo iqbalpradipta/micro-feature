@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Partai } from "./partai";
+import { Voting } from "./voting";
 
 @Entity({ name: "paslon" })
 export class Paslon {
@@ -18,5 +20,15 @@ export class Paslon {
   img: string;
 
   @Column({ nullable: true })
-  koalisi: string;
+  votePoint: number;
+
+  @OneToMany(() => Partai, (partai) => partai.paslon, {
+    onDelete: "CASCADE"
+  })
+  koalisi: Partai[]
+
+  @OneToMany(() => Voting, (voting) => voting.paslon, {
+    onDelete: "CASCADE"
+  })
+  voting: Voting[]
 }

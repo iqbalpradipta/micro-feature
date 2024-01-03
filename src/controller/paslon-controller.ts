@@ -42,7 +42,7 @@ export default new (class PaslonController {
 
   async findById(req: Request, res: Response) {
     try {
-      const id = req.params
+      const id = req.params.id
       const response = await paslonService.getId(id);
 
       return res.status(200).json(response);

@@ -5,6 +5,7 @@ import paslonController from "../controller/paslon-controller";
 import partaiController from "../controller/partai-controller";
 import authController from "../controller/auth-controller";
 import authMiddlewares from "../middlewares/authMiddlewares";
+import votingController from "../controller/voting-controller";
 
 const routes = express.Router();
 
@@ -23,5 +24,7 @@ routes.get("/partai/:id", partaiController.findById);
 
 routes.post("/auth/register", authController.authRegister);
 routes.post("/auth/login", authController.authLogin);
+
+routes.get("/voting", votingController.find);
 
 export default routes;

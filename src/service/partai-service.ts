@@ -36,9 +36,7 @@ export default new class PartaiService {
     async getById(id: any): Promise<object>{
         try {
             const GetPartaiById = await this.PartaiRepository
-            .createQueryBuilder()
-            .select("partai")
-            .from(Partai, 'partai')
+            .createQueryBuilder('partai')
             .where('partai.id = :id', id)
             .getOneOrFail()
 

@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Paslon } from "./paslon";
 
 @Entity({ name: "partai" })
 export class Partai {
@@ -19,4 +20,9 @@ export class Partai {
 
   @Column()
   img: string;
+
+  @ManyToOne(() => Paslon, (paslon) => paslon.koalisi, {
+    onDelete: "CASCADE"
+  })
+  paslon: Paslon
 }
