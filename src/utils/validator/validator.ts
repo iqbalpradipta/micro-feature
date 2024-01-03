@@ -23,3 +23,16 @@ export const createPartaiSchema = Joi.object({
     img: Joi.string().allow(null),
 })
 
+export const createUserSchema = Joi.object({
+    fullName: Joi.string().required(),
+    alamat: Joi.string().required(),
+    jenisKelamin: Joi.string().required(),
+    username: Joi.string().required(),
+    password: Joi.string().required(),
+})
+
+export const createLoginSchema = Joi.object({
+    username: Joi.string().required(),
+    password: Joi.string().required(),
+})
+
