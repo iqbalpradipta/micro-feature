@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from "typeorm";
+import { Users } from "./users";
 
 @Entity({ name: "article" })
 export class Article {
@@ -11,12 +12,14 @@ export class Article {
   @CreateDateColumn()
   date: Date;
 
-  @Column({ nullable: true })
+  @Column()
   img: string;
 
   @Column()
-  author: string;
-
-  @Column()
   description: string;
+
+  @ManyToOne(() => Users, (users) => users.article, {
+    onDelete: "CASCADE"
+  })
+  author: Users
 }

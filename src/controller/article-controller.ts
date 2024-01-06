@@ -8,13 +8,7 @@ export default new (class ArticleController {
     try {
       const response = await articleService.get();
 
-      const responseData = response as { data: any };
-
-      for (let i = 0; i < responseData.data.length; i++) {
-        delete responseData.data[i].description;
-      }
-
-      return res.status(200).json(responseData);
+      return res.status(200).json(response);
     } catch (error) {
       return res.status(500).json(error);
     }

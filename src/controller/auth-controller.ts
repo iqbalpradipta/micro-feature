@@ -14,6 +14,9 @@ export default new class AuthController {
             
             const hashPassword = await bcrypt.hash(data.password, 10)
 
+            value.roles = ['users']
+            value.voted = false
+
             value.password = hashPassword
 
             const response = await authService.register(value)

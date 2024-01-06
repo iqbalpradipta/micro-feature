@@ -31,6 +31,7 @@ export default new class PaslonService {
             "paslon.nomorUrut",
             "paslon.visiMisi",
             "paslon.img",
+            "paslon.votePoint",
             "partai.id",
             "partai.name",
           ])
@@ -57,6 +58,7 @@ export default new class PaslonService {
                   "paslon.nomorUrut",
                   "paslon.visiMisi",
                   "paslon.img",
+                  "paslon.votePoint",
                   "partai.id",
                   "partai.name",
                 ])

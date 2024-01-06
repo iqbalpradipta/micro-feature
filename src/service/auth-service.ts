@@ -12,7 +12,7 @@ export default new class AuthService {
         try {
             const checkUser = await this.AuthRepository.count({ where: { username: data.username } })
             if (checkUser > 0) return `User ${data.username} has been taken`
-
+            
             const authRegister = await this.AuthRepository.save(data)
             return{
                 messages: "Create data success",
@@ -35,7 +35,8 @@ export default new class AuthService {
                 fullName: checkUser.fullName,
                 alamat: checkUser.alamat,
                 jenisKelamin: checkUser.jenisKelamin,
-                username: checkUser.username
+                username: checkUser.username,
+                roles: checkUser.roles
             }
 
             const token = jwt.sign({dataObj}, SECRET_KEY, { expiresIn: "1h" })
