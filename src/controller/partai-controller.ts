@@ -48,11 +48,11 @@ export default new class PartaiController {
     async paslonPick(req: Request, res: Response) {
         try {
             const data = {
-                partaiId: req.body.partaiId,
+                id: req.params.id,
                 paslonId: req.body.paslonId
             }
 
-            const response = await partaiService.pickPaslon(data.partaiId, data.paslonId)
+            const response = await partaiService.pickPaslon(data.id, data.paslonId)
 
             res.status(200).json(response)
         } catch (error) {

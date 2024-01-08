@@ -33,22 +33,24 @@ export default new class VotingService {
         }
       }
 
-      async votePaslon(paslonId: number, usersId: number): Promise<object | string> {
+      async votePaslon(data: any): Promise<object | string> {
         try {
-          const paslon = await this.paslonRepository.findOne({ where: { id: paslonId } });
-          const users = await this.usersRepository.findOne({ where: { id: usersId } });
-          
+          const paslon = await this.paslonRepository.findOne({ where: { id: data.paslonId } });         
           paslon.votePoint += 1;
-
           await this.paslonRepository.save(paslon);
+          const users = await this.usersRepository.findOne({ where: { id: data.users } });
+          if(users.voted === true) return 'You already voted'
+          users.voted = true
+          await this.usersRepository.save(users)
 
           const createVoting = this.VotingRepository
             .createQueryBuilder()
             .insert()
             .into(Voting)
-            .values({ paslon: paslon, users: users })
+            .values({users: users, paslon: paslon})
             .execute();
       
+
           return {
             message: "Success Vote Paslon",
             data: createVoting

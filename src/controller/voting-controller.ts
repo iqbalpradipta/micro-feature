@@ -19,12 +19,10 @@ export default new class VotingController {
 
     async paslonVote(req: Request, res: Response) {
       try {
-        const data = {
-          userId: req.body.userId,
-          paslonId: req.body.paslonId
-        }
+        const data = req.body
+        data.users = res.locals.loginSession.Users.id
 
-        const response = await votingService.votePaslon(data.paslonId, data.userId)
+        const response = await votingService.votePaslon(data)
         
         res.status(200).json(response)
       } catch (error) {

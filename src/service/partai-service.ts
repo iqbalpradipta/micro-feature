@@ -49,17 +49,18 @@ export default new class PartaiService {
         }
     } 
 
-    async pickPaslon(partai: any, paslon: any): Promise<object>{
-        try {
-            const getPartai = await this.PartaiRepository
-            .createQueryBuilder('partai')
-            .getOneOrFail()
-            
-            getPartai.paslon = paslon
-            const pickPaslon = await this.PartaiRepository.save(getPartai)
+    async pickPaslon(id: any, paslon: any): Promise<object>{
+        try{
+            const toPartai = await this.PartaiRepository
+            .createQueryBuilder()
+            .update('partai')
+            .set({ paslon: paslon})
+            .where("id = :id", { id })
+            .execute();
+
             return{
                 messages: "Success Pick partai",
-                data: pickPaslon
+                data: toPartai
             }
         } catch (error) {
             throw error

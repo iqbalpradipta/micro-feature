@@ -4,6 +4,7 @@ export const createArticleSchema = Joi.object({
     title: Joi.string().min(5).max(50).required(),
     img: Joi.string().allow(null),
     description: Joi.string().min(5).required(),
+    author: Joi.number().required(),
 });
 
 export const createPaslonSchema = Joi.object({
@@ -11,7 +12,6 @@ export const createPaslonSchema = Joi.object({
     nomorUrut: Joi.number().required(),
     visiMisi: Joi.string().required(),
     img: Joi.string().allow(null),
-    koalisi: Joi.string().allow(null),
 })
 
 export const createPartaiSchema = Joi.object({

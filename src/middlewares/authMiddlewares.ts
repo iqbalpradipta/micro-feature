@@ -15,7 +15,7 @@ export default new class authMidlleware {
             const token = authHeader.split(" ")[1]
             try {
                 const decodedToken: any = jwt.verify(token, SECRET_KEY);
-                const userRoles = decodedToken.dataObj.roles
+                const userRoles = decodedToken.Users.roles
 
                 if (!userRoles.includes(requiredRole)) {
                 return res.status(403).json({ message: 'User role not found' });
@@ -28,5 +28,5 @@ export default new class authMidlleware {
                 return res.status(401).json({messages: 'token not valid'})
             }
         }
-    }
+    }        
 }

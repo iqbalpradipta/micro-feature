@@ -6,13 +6,8 @@ import cloudinary from "../libs/cloudinary";
 export default new (class PaslonController {
   async insert(req: Request, res: Response) {
     try {
-      const data = {
-        name: req.body.name,
-        nomorUrut: req.body.nomorUrut,
-        visiMisi: req.body.visiMisi,
-        img: res.locals.filename,
-        koalisi: req.body.koalisi
-      };
+      const data = req.body
+      data.img = res.locals.filename
 
       const { error, value } = createPaslonSchema.validate(data);
       if (error) return res.status(400).json(error.details[0].message);
@@ -24,7 +19,7 @@ export default new (class PaslonController {
 
       return res.status(200).json(response);
     } catch (error) {
-        console.log(error)
+
       return res.status(500).json(error);
     }
   }

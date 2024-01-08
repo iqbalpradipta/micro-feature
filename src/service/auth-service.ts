@@ -31,7 +31,8 @@ export default new class AuthService {
             const passwordCompare = await bcrypt.compare(data.password, checkUser.password)
             if(!passwordCompare) return 'Password is wrong!'
 
-            const dataObj = {
+            const Users = {
+                id: checkUser.id,
                 fullName: checkUser.fullName,
                 alamat: checkUser.alamat,
                 jenisKelamin: checkUser.jenisKelamin,
@@ -39,7 +40,7 @@ export default new class AuthService {
                 roles: checkUser.roles
             }
 
-            const token = jwt.sign({dataObj}, SECRET_KEY, { expiresIn: "1h" })
+            const token = jwt.sign({Users}, SECRET_KEY, { expiresIn: "1h" })
 
             return {
                 messages: 'login success',
