@@ -72,5 +72,39 @@ export default new class PaslonService {
           console.error("Error in getId:", error);
           throw error
         }
+    }
+
+    async update(id: any, data: any): Promise<object> {
+      try {
+        const updatePaslon = await this.PaslonRepository
+        .createQueryBuilder()
+        .update('paslon')
+        .set(data)
+        .where("id = :id", { id })
+        .execute();
+          return {
+            messages: "success update paslon",
+            data: updatePaslon
+          }
+      } catch (error) {
+          throw error
       }
+    }
+
+    async delete(id: any): Promise<object> {
+      try {
+        const deletePaslon = await this.PaslonRepository
+        .createQueryBuilder()
+        .delete()
+        .from(Paslon)
+        .where("id = :id", { id })
+        .execute();
+        return{
+          messages: 'success delete paslon',
+          data: deletePaslon
+        }
+      } catch (error) {
+          throw error
+      }
+    } 
 }

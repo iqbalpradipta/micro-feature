@@ -65,5 +65,39 @@ export default new class PartaiService {
         } catch (error) {
             throw error
         }
-    } 
+    }
+
+    async update(id: any, data: any): Promise<object> {
+        try {
+          const updatePartai = await this.PartaiRepository
+          .createQueryBuilder()
+          .update('partai')
+          .set(data)
+          .where("id = :id", { id })
+          .execute();
+            return {
+              messages: "success update partai",
+              data: updatePartai
+            }
+        } catch (error) {
+            throw error
+        }
+      }
+  
+      async delete(id: any): Promise<object> {
+        try {
+          const deletePartai = await this.PartaiRepository
+          .createQueryBuilder()
+          .delete()
+          .from(Partai)
+          .where("id = :id", { id })
+          .execute();
+          return{
+            messages: 'success delete partai',
+            data: deletePartai
+          }
+        } catch (error) {
+            throw error
+        }
+      }
 }

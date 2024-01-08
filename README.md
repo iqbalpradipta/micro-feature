@@ -110,7 +110,7 @@ note: you will received token which is used to authorization<br>
 ````
     name          = Bowo
     nomorUrut     = 1
-    visiMisi = Berantas Tikus
+    visiMisi      = Berantas Tikus
     img         = wujudAseliBowo.png
 ````
 5. Delete a paslon (required authorization (admin))<br>
@@ -164,7 +164,7 @@ note: you will received token which is used to authorization<br>
 
 #### E. Voter
 
-1. Getting all vote (no required authorization)<br>
+1. Getting all vote (required authorization (users))<br>
 * Url       : http://localhost:5000/api/v1/voting
 * Method    : `GET`
 
@@ -178,4 +178,17 @@ note: you will received token which is used to authorization<br>
         }
 
 
+### NOTES:
+If error when POST article, paslon, or Partai and error return:
+
+        {
+            "error": 
+            { 
+                "code": "ETIMEDOUT" 
+            }
+        }
+
+make sure your internet is stable because the problem is when uploading image to cloudinary
+
+to resolve this error Only change your internet.
 

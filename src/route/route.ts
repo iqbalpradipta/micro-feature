@@ -19,18 +19,22 @@ routes.delete("/article/:id", authMiddlewares.Auth('admin'), articleController.d
 routes.post("/paslon", authMiddlewares.Auth('admin'),uploadFiles.upload("img"), paslonController.insert);
 routes.get("/paslon",  paslonController.find);
 routes.get("/paslon/:id",  paslonController.findById);
+routes.put("/paslon/:id", authMiddlewares.Auth('admin'), uploadFiles.upload("img"), paslonController.update);
+routes.delete("/paslon/:id", authMiddlewares.Auth('admin'), paslonController.delete);
 
 routes.post("/partai", authMiddlewares.Auth('admin'),uploadFiles.upload("img"), partaiController.insert);
 routes.get("/partai", partaiController.find);
 routes.get("/partai/:id", partaiController.findById);
 routes.post("/partai/:id", authMiddlewares.Auth('admin'), partaiController.paslonPick)
+routes.put("/partai/:id", authMiddlewares.Auth('admin'), uploadFiles.upload("img"), partaiController.update);
+routes.delete("/partai/:id", authMiddlewares.Auth('admin'), partaiController.delete);
 
 routes.post("/auth/register", authController.authRegister);
 routes.post("/auth/register", authController.authRegister);
 routes.post("/auth/register/admin", authController.registerAdmin);
 routes.post("/auth/login", authController.authLogin);
 
-routes.get("/voting", votingController.find);
+routes.get("/voting", authMiddlewares.Auth('users'), votingController.find);
 routes.post("/voting", authMiddlewares.Auth('users'), votingController.paslonVote)
 
 export default routes;

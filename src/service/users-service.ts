@@ -36,4 +36,38 @@ export default new class UsersService {
           throw error
         }
       }
+
+      async update(id: any, data: any): Promise<object> {
+        try {
+          const updateUsers = await this.UsersRepository
+          .createQueryBuilder()
+          .update('users')
+          .set(data)
+          .where("id = :id", { id })
+          .execute();
+            return {
+              messages: "success update Users",
+              data: updateUsers
+            }
+        } catch (error) {
+            throw error
+        }
+      }
+  
+      async delete(id: any): Promise<object> {
+        try {
+          const deleteUsers = await this.UsersRepository
+          .createQueryBuilder()
+          .delete()
+          .from(Users)
+          .where("id = :id", { id })
+          .execute();
+          return{
+            messages: 'success delete Users',
+            data: deleteUsers
+          }
+        } catch (error) {
+            throw error
+        }
+      }
 }
